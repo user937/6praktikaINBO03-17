@@ -1,0 +1,87 @@
+
+
+#include <string>
+#include <iostream>
+using namespace std;
+ 
+class Property
+{
+protected:
+    
+public:
+	double worth;
+	string name;
+    Property (string name,double sum)
+        : name(name)
+    {
+    	worth=sum;
+    };
+    
+    virtual double taxcalc() = 0;
+	 };
+ 
+class Appartment : public Property
+{
+public:
+    Appartment(string name,double sum) : Property(name,sum)
+    {
+    };
+ 
+   double taxcalc()
+    {
+    	return worth/1000;
+    }
+    
+};
+ 
+class Car : public Property
+{
+public:
+    Car(string name,double sum) : Property(name,sum)
+    {
+    };
+ 
+    double taxcalc() 
+    {
+        return worth/200;
+    }
+};
+ 
+class CountryHouse : public Property
+{
+public:
+    CountryHouse(string name,double sum) : Property(name,sum)
+    {
+    };
+ 
+    double taxcalc()
+    {
+       return worth/500; 
+    }
+};
+ 
+
+ 
+int main()
+{
+	setlocale(0,"rus");
+ 
+    Property *Properties[7] = {
+        new Appartment("Дом1",10000000),
+        new Appartment("Дом2",13252436),
+        new Appartment("Дом3",523523473),
+		new Car("Ferrari",44782487),
+		new Car("Lamborgini",4842687),
+		new CountryHouse("Дача1",432523),
+		new CountryHouse("Дача2",432654) 
+    };
+ 
+    for (int i = 0; i < 7; i++)
+        {
+        	cout << "На объект " << Properties[i]->name << " Налог: " << Properties[i]->taxcalc()<< endl;
+		
+		};
+    
+     system("pause"); 
+         return 0;
+}
